@@ -35,7 +35,7 @@ unetModel <- createUnetModel2D( c( resampledSliceSize, channelSize ),
 
 cat( "Loading weights file" )
 startTime <- Sys.time()
-weightsFileName <- "unetModel2DWeights.h5" # getPretrainedNetwork( "lungVentilationSegmentation" )
+weightsFileName <- getPretrainedNetwork( "functionalLungMri" )
 load_model_weights_hdf5( unetModel, filepath = weightsFileName )
 endTime <- Sys.time()
 elapsedTime <- endTime - startTime

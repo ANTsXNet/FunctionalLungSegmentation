@@ -1,43 +1,41 @@
-# App:  Brain Segmentation
+# App:  Functional MR lung segmentation
 
-Deep learning app made for T1-weighted MRI brain segmentation using ANTsRNet
+Deep learning app made for functional MRI lung slice-by-slice segmentation using ANTsRNet
+
+## Citation
+
+* __Nicholas J. Tustison__, Brian B. Avants, Zixuan Lin, Xue Feng, Nicholas Cullen, Jaime F. Mata, Lucia Flors, James C. Gee, Talissa A. Altes, John P. Mugler III, and Kun Qing.  Convolutional Neural Networks with Template-Based Data Augmentation for Functional Lung Image Quantification, _Academic Radiology_. [(pubmed)](https://www.ncbi.nlm.nih.gov/pubmed/30195415)
 
 ## Model training notes
 
-* Training data: IXI, NKI, Kirby, Oasis, ADNI SSTs
+* Training data: Xenon-129 and He-3 ventilation MRI
 * Unet model (see ``Scripts/Training/``).
 * Template-based data augmentation
 
-## Sample prediction usage
+## Sample usage
 
 ```
 #
 #  Usage:
-#    Rscript doBrainSegmentation.R inputImage inputImageBrainExtractionMask outputImage reorientationTemplate
-#
-#  MacBook Pro 2016 (no GPU)
+#    Rscript doBrainExtraction.R inputImage inputLungMask outputPrefix
 #
 
-$ Rscript Scripts/doBrainTissueSegmentation.R Data/Example/1097782_defaced_MPRAGE.nii.gz Data/Example/1097782_defaced_MPRAGEBrainExtractionMask.nii.gz output Data/Template/S_template3_resampled2.nii.gz
-
-Reading reorientation template Data/Template/S_template3_resampled2.nii.gz  (elapsed time: 0.143312 seconds)
+$ Rscript Scripts/doSliceBySliceVentilationSegmentation.R Data/Examples/000667N4.nii.gz Data/Examples/000667Mask.nii.gz output
 Using TensorFlow backend.
-Loading weights filetrying URL 'https://ndownloader.figshare.com/files/13812053'
-Content type 'application/octet-stream' length 5669488 bytes (5.4 MB)
+Loading weights filetrying URL 'https://ndownloader.figshare.com/files/13824167'
+Content type 'application/octet-stream' length 23843832 bytes (22.7 MB)
 ==================================================
-downloaded 5.4 MB
+downloaded 22.7 MB
 
-2018-12-12 16:09:29.346764: I tensorflow/core/platform/cpu_feature_guard.cc:140] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
-  (elapsed time: 7.987081 seconds)
-Reading  Data//Example/1097782_defaced_MPRAGE.nii.gz  (elapsed time: 0.425921 seconds)
-Normalizing to template and cropping to mask.  (elapsed time: 1.093345 seconds)
-Prediction and decoding (elapsed time: 29.52414 seconds)
-Renormalize to native space  (elapsed time: 3.744169 seconds)
-Writing output  (elapsed time: 5.434884 seconds)
+2018-12-13 15:25:42.395870: I tensorflow/core/platform/cpu_feature_guard.cc:140] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+  (elapsed time: 22.20554 seconds)
+Reading  Data/Examples/000667N4.nii.gz  (elapsed time: 0.100543 seconds)
+Prediction and decoding (slice-by-slice).  (elapsed time: 16.79772 seconds)
+Writing output  (elapsed time: 0.581305 seconds)
 
-Total elapsed time: 40.53251 seconds
+Total elapsed time: 17.48219 seconds
 ```
 
 ## Sample results
 
-![Brain extraction results](Documentation/Images/resultsBrainSegmentation.png)
+![Brain extraction results](Documentation/Images/resultsLungSegmentation.png)
