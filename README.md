@@ -23,7 +23,7 @@ Deep learning app made for functional MRI lung slice-by-slice segmentation using
 ```
 #
 #  Usage:
-#    Rscript doBrainExtraction.R inputImage inputLungMask outputPrefix
+#    Rscript doSliceBySliceVentilationSegmentation.R inputImage inputLungMask outputPrefix
 #
 
 $ Rscript Scripts/doSliceBySliceVentilationSegmentation.R Data/Examples/000667N4.nii.gz Data/Examples/000667Mask.nii.gz output
